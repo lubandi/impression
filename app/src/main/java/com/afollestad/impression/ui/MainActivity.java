@@ -362,8 +362,9 @@ public class MainActivity extends ThemedActivity
             tag = "[root]";
         }
         @SuppressLint("CommitTransaction")
-        FragmentTransaction transaction = getFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, frag, tag);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, frag, tag);
+        transaction.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out);
         if (backStack)
             transaction.addToBackStack(null);
         try {
@@ -554,6 +555,11 @@ public class MainActivity extends ThemedActivity
             mCrumbs.setActiveOrAdd(crumb, !explorerMode, wasNull);
         }
         if (closeDrawer && mDrawerLayout != null)
+            mDrawerLayout.closeDrawers();
+    }
+
+    public void closeDrawer() {
+        if (mDrawerLayout != null)
             mDrawerLayout.closeDrawers();
     }
 

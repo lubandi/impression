@@ -5,6 +5,7 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -337,7 +338,14 @@ public class NavDrawerFragment extends Fragment implements NavDrawerAdapter.Call
         } else {
             mCurrentSelectedPosition = index;
             mAdapter.setItemChecked(index);
-            ((MainActivity) getActivity()).switchPage(entry.getPath(), true, index > 0);
+
+            ((MainActivity) getActivity()).closeDrawer();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    ((MainActivity) getActivity()).switchPage(entry.getPath(), false, index > 0);
+                }
+            }, 300);
         }
     }
 }
