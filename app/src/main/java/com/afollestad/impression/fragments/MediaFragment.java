@@ -76,6 +76,13 @@ public class MediaFragment extends LoaderFragment<MediaAdapter.ViewHolder> imple
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+        reload();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         if (getActivity() != null) {
@@ -106,8 +113,6 @@ public class MediaFragment extends LoaderFragment<MediaAdapter.ViewHolder> imple
                 act.setTitle(getTitle());
             crumb = act.mCrumbs.findCrumb(getAlbumPath());
         }
-
-        reload();
     }
 
     @Override
