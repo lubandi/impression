@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -40,6 +41,8 @@ import static com.afollestad.impression.ui.MainActivity.EXTRA_OLD_ITEM_POSITION;
  * @author Aidan Follestad (afollestad)
  */
 public class MediaFragment extends LoaderFragment<MediaAdapter.ViewHolder> implements MediaAdapter.Callback {
+
+    private static final long TOOLBAR_INDICATOR_SWITCH_DELAY = 250;
 
     private String mAlbumPath;
     private boolean mLastDarkTheme;
@@ -76,7 +79,7 @@ public class MediaFragment extends LoaderFragment<MediaAdapter.ViewHolder> imple
     public void onResume() {
         super.onResume();
         if (getActivity() != null) {
-            MainActivity act = (MainActivity) getActivity();
+            final MainActivity act = (MainActivity) getActivity();
             if (act.mMediaCab != null)
                 act.mMediaCab.setFragment(this, true);
 
@@ -85,13 +88,19 @@ public class MediaFragment extends LoaderFragment<MediaAdapter.ViewHolder> imple
                 invalidateLayoutManagerAndAdapter();
             }
 
-            if (mAlbumPath == null || mAlbumPath.equals(AlbumEntry.ALBUM_OVERVIEW) ||
-                    mAlbumPath.equals(Environment.getExternalStorageDirectory().getAbsolutePath())) {
-                act.drawerArrowOpen = true;
-                act.animateDrawerArrow(true);
-            } else {
-                act.animateDrawerArrow(false);
-            }
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (mAlbumPath == null || mAlbumPath.equals(AlbumEntry.ALBUM_OVERVIEW) ||
+                            mAlbumPath.equals(Environment.getExternalStorageDirectory().getAbsolutePath())) {
+                        act.drawerArrowOpen = true;
+                        act.animateDrawerArrow(true);
+                    } else {
+                        act.animateDrawerArrow(false);
+                    }
+                }
+            }, TOOLBAR_INDICATOR_SWITCH_DELAY);
+
 
             if (getTitle() != null)
                 act.setTitle(getTitle());
