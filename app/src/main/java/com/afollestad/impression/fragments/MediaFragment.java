@@ -82,8 +82,9 @@ public class MediaFragment extends LoaderFragment<MediaAdapter.ViewHolder> imple
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (!sharedPreferences.getBoolean("from_viewer", false)) {
-            sharedPreferences.edit().putBoolean("from_viewer", false).commit();
             reload();
+        } else {
+            sharedPreferences.edit().putBoolean("from_viewer", false).commit();
         }
     }
 
