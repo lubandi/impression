@@ -364,7 +364,6 @@ public class MainActivity extends ThemedActivity
         @SuppressLint("CommitTransaction")
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, frag, tag);
-        transaction.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out);
         if (backStack)
             transaction.addToBackStack(null);
         try {
