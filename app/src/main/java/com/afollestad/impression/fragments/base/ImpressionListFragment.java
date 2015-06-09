@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.TextView;
 
+import com.afollestad.impression.App;
 import com.afollestad.impression.R;
 import com.afollestad.impression.ui.MainActivity;
 
@@ -25,7 +26,10 @@ public abstract class ImpressionListFragment extends Fragment {
     // impression won't show the progress indicator until after this delay goes off
     // this is a silly fix, but a good one for people that don't want it to flash on
     // at the beginning when it is barely there for any time at all
-    private static final long PROGRESS_INDICATOR_DELAY = 1000;
+
+    // todo:
+    // for drive or dropbox, this delay should be 0, but I haven't done anything with that yet.
+    private long PROGRESS_INDICATOR_DELAY = 1000;
 
     private static final long ALPHA_ANIMATION_TIME = 300;
     private static final TimeInterpolator ALPHA_ANIMATION_INTERPOLATOR =
