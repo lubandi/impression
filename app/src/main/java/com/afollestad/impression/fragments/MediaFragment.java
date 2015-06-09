@@ -2,6 +2,7 @@ package com.afollestad.impression.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -79,7 +80,11 @@ public class MediaFragment extends LoaderFragment<MediaAdapter.ViewHolder> imple
     public void onStart() {
         super.onStart();
 
-        reload();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        if (!sharedPreferences.getBoolean("from_viewer", false)) {
+            sharedPreferences.edit().putBoolean("from_viewer", false).commit();
+            reload();
+        }
     }
 
     @Override

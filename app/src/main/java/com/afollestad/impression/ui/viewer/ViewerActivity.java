@@ -22,6 +22,7 @@ import android.nfc.NfcAdapter;
 import android.nfc.NfcEvent;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.print.PrintHelper;
 import android.support.v4.view.ViewPager;
@@ -887,11 +888,16 @@ public class ViewerActivity extends ThemedActivity implements SlideshowInitDialo
     @Override
     public void finishAfterTransition() {
         mIsReturning = true;
+
         Intent data = new Intent();
         if (getIntent() != null)
             data.putExtra(EXTRA_OLD_ITEM_POSITION, getIntent().getIntExtra(EXTRA_CURRENT_ITEM_POSITION, 0));
         data.putExtra(EXTRA_CURRENT_ITEM_POSITION, mCurrentPosition);
         setResult(RESULT_OK, data);
-        super.finishAfterTransition();
+
+        PreferenceManager.getDefaultSharedPreferences(this).edit()
+                .putBoolean("from_viewer", true).commit();
+
+        super.finish();
     }
 }
