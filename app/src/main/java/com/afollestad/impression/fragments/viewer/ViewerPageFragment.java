@@ -22,6 +22,7 @@ import com.afollestad.impression.api.PhotoEntry;
 import com.afollestad.impression.api.VideoEntry;
 import com.afollestad.impression.api.base.MediaEntry;
 import com.afollestad.impression.ui.viewer.ViewerActivity;
+import com.afollestad.impression.views.ImpressionPhotoViewAttacher;
 import com.afollestad.impression.utils.Utils;
 import com.afollestad.impression.views.ImpressionVideoView;
 import com.afollestad.impression.views.ScaleListenerImageView;
@@ -53,7 +54,7 @@ public class ViewerPageFragment extends Fragment {
     public short mLightMode = LIGHT_MODE_UNLOADED;
     private boolean mImageZoomedUnderToolbar;
 
-    private PhotoViewAttacher mAttacher;
+    private ImpressionPhotoViewAttacher mAttacher;
     private ScaleListenerImageView mPhoto;
     private ImpressionVideoView mVideo;
     private Bitmap mBitmap;

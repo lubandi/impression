@@ -5,8 +5,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
 
-import uk.co.senab.photoview.PhotoViewAttacher;
-
 /**
  * @author Aidan Follestad (afollestad)
  */
@@ -20,15 +18,15 @@ public class ScaleListenerImageView extends ImageView {
         super(context, attrs);
     }
 
-    private PhotoViewAttacher mAttacher;
+    private ImpressionPhotoViewAttacher mAttacher;
     private boolean checkForChange;
 
-    public PhotoViewAttacher setPhotoAttacher() {
+    public ImpressionPhotoViewAttacher setPhotoAttacher() {
         if (mAttacher != null) {
             mAttacher.cleanup();
             mAttacher = null;
         }
-        mAttacher = new PhotoViewAttacher(this);
+        mAttacher = new ImpressionPhotoViewAttacher(this);
         return mAttacher;
     }
 
