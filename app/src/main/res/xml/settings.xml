@@ -33,6 +33,15 @@
             android:title="@string/overview_display"
             android:widgetLayout="@layout/preference_dynamiccheckbox" />
 
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="toolbar_filters"
+            android:layout="@layout/preference_custom"
+            android:persistent="true"
+            android:summary="@string/toolbar_filters_desc"
+            android:title="@string/toolbar_filters"
+            android:widgetLayout="@layout/preference_dynamiccheckbox" />
+
     </com.afollestad.impression.views.ImpressionPreferenceCategory>
 
     <com.afollestad.impression.views.ImpressionPreferenceCategory

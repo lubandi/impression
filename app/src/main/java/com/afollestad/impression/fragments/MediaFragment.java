@@ -240,6 +240,11 @@ public class MediaFragment extends LoaderFragment<MediaAdapter.ViewHolder> imple
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        if (!PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("toolbar_filters", true)) {
+            super.onCreateOptionsMenu(menu, inflater);
+            return;
+        }
+        
         inflater.inflate(R.menu.fragment, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
